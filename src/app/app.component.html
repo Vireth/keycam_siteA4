@@ -1,3 +1,15 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary">
+  <button md-button [routerLink]="['/home']">KeyCam</button>
+  <img class="flag" src="../assets/flag_fr.png"/>
+  <img class="flag" src="../assets/flag_gb.png"/>
+
+  <span class="example-spacer"></span>
+
+  <button md-button [routerLink]="['/team']">Team</button>
+  <button md-button [routerLink]="['/home']">Login</button>
+
+</md-toolbar>
+<router-outlet></router-outlet>
+<footer>
+  <app-footer></app-footer>
+</footer>
