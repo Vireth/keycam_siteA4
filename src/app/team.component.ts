@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-team',
@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./team.component.css']
 })
 export class TeamComponent {
-
+  public name = 'Simon';
+  public student_id = '123456789';
+  public role = 'Dev';
+  public img = '';
   constructor(){}
 }
