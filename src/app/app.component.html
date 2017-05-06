@@ -1,4 +1,4 @@
-<md-toolbar color="primary">
+<md-toolbar color="primary" class="headToolbar">
   <button md-button [routerLink]="['/home']">KeyCam</button>
 
   <img *ngIf="selectedValue == 'french'" class="flag" src="../assets/flag_fr.png"/>
@@ -15,7 +15,11 @@
   <span class="example-spacer"></span>
 
   <button md-button [routerLink]="['/team']">{{ 'MENU.team' | translate }}</button>
-  <button md-button [routerLink]="['/home']">{{ 'MENU.login' | translate }}</button>
+  <p md-button *ngIf="user; else username">{{ user }}</p>
+
+  <ng-template #username>
+    <button md-button (click)="openDialog()">{{ 'MENU.login' | translate }}</button>
+  </ng-template>
 
 </md-toolbar>
 <router-outlet></router-outlet>
