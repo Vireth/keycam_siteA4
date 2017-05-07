@@ -20,6 +20,16 @@ export class KeycamService {
       .catch(response => false);
   }
 
+  create(email: string, password: string): Promise<any> {
+    const url = `${this.url + 'register'}`;
+    const data = {email: email, password: password};
+
+    return this.http.post(url, data, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json())
+      .catch(response => false);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);

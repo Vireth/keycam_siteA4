@@ -5,10 +5,9 @@
   <img *ngIf="selectedValue == 'english'" class="flag" src="../assets/flag_gb.png"/>
   <img *ngIf="selectedValue == 'sweden'" class="flag" src="../assets/flag_se.png"/>
   &nbsp;&nbsp;
-  <md-select placeholder="Language" [(ngModel)]="selectedValue" (change)="flagSelected()" name="flag">
-    <md-option *ngFor="let food of foods" [value]="food.value">
-      {{ food.viewValue }}&nbsp;&nbsp;
-      <img src="{{ food.image }}">
+  <md-select style="color: ghostwhite" [(ngModel)]="selectedValue" (change)="flagSelected()" name="flag">
+    <md-option *ngFor="let language of languages" [value]="language.value">
+      {{ language.viewValue }}&nbsp;&nbsp;<img src="{{ language.image }}">
     </md-option>
   </md-select>
 

@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {TranslateService} from 'ng2-translate';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import {MdDialog} from '@angular/material';
 import {LoginComponent} from './Login/login.component';
-import {consoleTestResultHandler} from 'tslint/lib/test';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +11,9 @@ import {consoleTestResultHandler} from 'tslint/lib/test';
 export class AppComponent {
   selectedValue: string;
   user: string = null;
+  dialogRefLogin;
 
-  foods = [
+  languages = [
     {value: 'french', viewValue: 'French', image: './assets/flag_fr.png'},
     {value: 'english', viewValue: 'English', image: './assets/flag_gb.png'},
     {value: 'sweden', viewValue: 'Sweden', image: './assets/flag_se.png'}
@@ -45,10 +45,12 @@ export class AppComponent {
     }
   }
 
-  openDialog() { // TODO TO MOVE
-    const dialogRef = this.dialog.open(LoginComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      this.user = result;
+  openDialog() {
+    this.dialogRefLogin = this.dialog.open(LoginComponent);
+    this.dialogRefLogin.afterClosed().subscribe(result => {
+      if (result != null) {
+        this.user = result;
+      }
     });
   }
 }

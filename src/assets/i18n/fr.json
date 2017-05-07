@@ -10,6 +10,7 @@
     "password": "Mot de passe",
     "create": "Nouveau compte!",
     "here": "ici",
-    "log": "Connection"
+    "log": "Connection",
+    "register": "S'enregister"
   }
 }

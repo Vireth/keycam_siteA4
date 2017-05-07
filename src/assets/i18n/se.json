@@ -10,6 +10,7 @@
     "password": "Lösenord",
     "create": "Nytt konto!",
     "here": "här",
-    "log": "Logga in"
+    "log": "Logga in",
+    "register": "Registrera"
   }
 }
