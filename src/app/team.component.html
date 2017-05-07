@@ -1,19 +1,5 @@
-﻿<h1 style="text-align: center">Our team group</h1>
-<br>
-<div class="row center"> <!-- SITE & API -->
-  <div class="card" ng-repeat="person in team.web">
-    <div class="header-bg">
-      <h3>{{person.name}}</h3>
-    </div>
-    <div class="avatar">
-      <img src="{{'img/team/' + person.img}}" alt="keysim" />
-    </div>
-
-    <p class="card-desc">{{person.student_id}}<br>{{person.role}}</p>
-  </div>
-</div>
-<div class="row center"><!-- Android -->
-  <div class="card" ng-repeat="person in team.android">
+﻿<!--<div class="row center"> <!-- SITE & API -- >
+  <div *ng-for="let person of team.web" class="card">
     <div class="header-bg">
       <h3>{{person.name}}</h3>
     </div>
@@ -23,8 +9,8 @@
     <p class="card-desc">{{person.student_id}}<br>{{person.role}}</p>
   </div>
 </div>
-<div class="row center"><!-- Video -->
-  <div class="card" ng-repeat="person in team.video">
+<div class="row center"><!-- Android -- >
+  <div class="card" *ng-for="let person of team.android">
     <div class="header-bg">
       <h3>{{person.name}}</h3>
     </div>
@@ -34,3 +20,14 @@
     <p class="card-desc">{{person.student_id}}<br>{{person.role}}</p>
   </div>
 </div>
+<div class="row center"><!-- Video -- >
+  <div class="card" *ng-for="let person of team">
+    <div class="header-bg">
+      <h3>{{person.name}}</h3>
+    </div>
+    <div class="avatar">
+      <img src="{{'img/team/' + person.img}}" alt="keysim" />
+    </div>
+    <p class="card-desc">{{person.student_id}}<br>{{person.role}}</p>
+  </div>
+</div>-->
