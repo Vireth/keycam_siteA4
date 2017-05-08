@@ -8,7 +8,6 @@ import {
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeComponent } from './home.component';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer.component';
 import { TeamComponent } from './team.component';
@@ -18,6 +17,8 @@ import {KeycamService} from './Service/keycam.service';
 import {CreateComponent} from './Creat/create.component';
 import {CookieModule} from 'ngx-cookie';
 import {CameraComponent} from './Camera/camera.component';
+import { SocketService } from './Service/socket.service';
+import { CanActivateViaAuthGuard } from './Service/can-activate.service';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -26,7 +27,6 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     FooterComponent,
     TeamComponent,
     LoginComponent,
@@ -60,7 +60,12 @@ export function createTranslateLoader(http: Http) {
   entryComponents: [
     LoginComponent
   ],
-  providers: [KeycamService],
+  providers: [
+    KeycamService,
+    SocketService,
+    CanActivateViaAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
+import { Router } from '@angular/router';
 import {SnackBar} from '../Information/snack-bar';
+import { SocketService } from '../Service/socket.service';
+import { KeycamService } from '../Service/keycam.service';
 
 @Component({
   selector: 'app-camera',
@@ -8,5 +11,8 @@ import {SnackBar} from '../Information/snack-bar';
   styleUrls: ['./camera.component.css']
 })
 export class CameraComponent {
-  constructor() {}
+  
+  constructor(private socketService: SocketService, private KeycamService: KeycamService, private router: Router) {
+
+  }
 }
