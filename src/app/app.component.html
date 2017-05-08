@@ -1,5 +1,5 @@
 <md-toolbar color="primary" class="headToolbar">
-  <button md-button [routerLink]="['/home']">KeyCam</button>
+  <button md-button [routerLink]="['/team']">KeyCam</button>
 
   <img *ngIf="selectedValue == 'french'" class="flag" src="../assets/flag_fr.png"/>
   <img *ngIf="selectedValue == 'english'" class="flag" src="../assets/flag_gb.png"/>
@@ -13,9 +13,8 @@
 
   <span class="example-spacer"></span>
 
-  <button md-button [routerLink]="['/team']">{{ 'MENU.team' | translate }}</button>
   <p md-button *ngIf="user; else username">{{ user }}</p>
-  <button md-button *ngIf="user" (click)="logOut()">{{ 'MENU.off' | translate }}</button>
+  <img class="flag" *ngIf="user" (click)="logOut()" src="../assets/logout.png"/>
 
   <ng-template #username>
     <button md-button (click)="openDialog()">{{ 'MENU.login' | translate }}</button>

@@ -6,27 +6,48 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  private url = 'http://localhost:4444/';
+  private url = 'http://10.0.1.6:4444/';
   private socket;
 
   constructor(private cookieService: CookieService) {
     const user = this.cookieService.getObject('User');
-    // this.socket = io('http://localhost:4444/', {query: "type=parent&token=" + ""});
+    this.socket = io(this.url, {query: "type=parent&token=" + user['token']});
   }
 
-  sendMessage(message) {
-    this.socket.emit('add-message', message);
-  }
-
-  getMessages() {
+  getPicture() {
     const observable = new Observable(observer => {
-      this.socket.on('message', (data) => {
+      this.socket.on('picture', (data) => {
         observer.next(data);
       });
       return () => {
-        this.socket.disconnect();
+        console.log('Picture disconnected')
+
       };
     });
     return observable;
+  }
+
+  askPicture() {
+    this.socket.emit('picture', 'toto');
+  }
+
+  sendText(message) {
+    this.socket.emit('text', message);
+  }
+
+  getText() {
+    const observable = new Observable(observer => {
+      this.socket.on('text', (data) => {
+        observer.next(data);
+      });
+      return () => {
+        console.log('Text disconnected')
+      };
+    });
+    return observable;
+  }
+
+  deconnect() {
+    this.socket.disconnect();
   }
 }
