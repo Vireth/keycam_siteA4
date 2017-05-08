@@ -1,0 +1,16 @@
+{
+  "MENU": {
+    "team": "L'équipe",
+    "login": "Connexion",
+    "copyright": "Copyright © 2017 KEYCAM Tous droits réservés."
+  },
+  "LOGIN": {
+    "sign": "CONNECTION",
+    "email": "Mail",
+    "password": "Mot de passe",
+    "create": "Nouveau compte!",
+    "here": "ici",
+    "log": "Connection",
+    "register": "S'enregister"
+  }
+}

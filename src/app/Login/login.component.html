@@ -1,0 +1,16 @@
+<h1 md-dialog-title>{{ 'LOGIN.sign' | translate }}</h1>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+  <md-input-container>
+    <input mdInput name="email" type="text" ngModel required placeholder="{{ 'LOGIN.email' | translate }}">
+  </md-input-container>
+  <br/>
+  <md-input-container>
+    <input mdInput name="password" type="password" ngModel required placeholder="{{ 'LOGIN.password' | translate }}">
+  </md-input-container>
+  <br><br>
+  {{ 'LOGIN.create' | translate }} <a class="ici" (click)="create()">{{ 'LOGIN.here' | translate }}</a>
+  <br><br>
+  <md-dialog-actions>
+    <button md-raised-button type="submit" [disabled]="isDisabled">{{ 'LOGIN.log' | translate }}</button>
+  </md-dialog-actions>
+</form>
