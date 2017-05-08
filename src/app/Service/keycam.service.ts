@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
+import {CookieService} from 'ngx-cookie';
+
 
 import 'rxjs/add/operator/toPromise';
 
@@ -8,7 +10,7 @@ export class KeycamService {
   private url = 'http://10.0.1.6:3333/api/'; // 'http://163.5.84.197:3000/api/'; // 'http://10.0.1.10:3333/api/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private cookieService: CookieService) { }
 
   connection(email: string, password: string): Promise<any> {
     const url = `${this.url + 'authenticate'}`;
@@ -28,6 +30,10 @@ export class KeycamService {
       .toPromise()
       .then(response => response.json())
       .catch(response => false);
+  }
+
+  isLoggedIn() : boolean {
+    return this.cookieService.getObject('User') ? true : false;
   }
 
   private handleError(error: any): Promise<any> {
