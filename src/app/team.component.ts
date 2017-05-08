@@ -8,7 +8,6 @@
 export class TeamComponent {
   data: any[] = [
     {
-      'team': 'web',
       'person': [
         {
           'name': 'Victoria Hjalmarsson',
@@ -25,7 +24,6 @@ export class TeamComponent {
       ]
     },
     {
-      'team': 'android',
       'person': [
         {
           'name': 'Maxime Lamarthe',
@@ -48,7 +46,6 @@ export class TeamComponent {
       ]
     },
     {
-      'team': 'video',
       'person': [
         {
           'name': 'Youh Iddahamou',
