@@ -2,7 +2,8 @@
   "MENU": {
     "team": "TEAM",
     "login": "LOGIN",
-    "copyright": "Copyright © 2017 KEYCAM. All rights reserved."
+    "copyright": "Copyright © 2017 KEYCAM. All rights reserved.",
+    "off": "LOG OUT"
   },
   "LOGIN": {
     "sign": "LOG IN",

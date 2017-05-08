@@ -15,6 +15,7 @@
 
   <button md-button [routerLink]="['/team']">{{ 'MENU.team' | translate }}</button>
   <p md-button *ngIf="user; else username">{{ user }}</p>
+  <button md-button *ngIf="user" (click)="logOut()">{{ 'MENU.off' | translate }}</button>
 
   <ng-template #username>
     <button md-button (click)="openDialog()">{{ 'MENU.login' | translate }}</button>

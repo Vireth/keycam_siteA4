@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class KeycamService {
-  private url = 'http://163.5.84.197:3000/api/'; // 'http://192.168.1.102:3333/api/'
+  private url = 'http://10.0.1.6:3333/api/'; // 'http://163.5.84.197:3000/api/'; // 'http://10.0.1.10:3333/api/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }

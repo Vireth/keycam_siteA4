@@ -2,7 +2,8 @@
   "MENU": {
     "team": "L'EQUIPE",
     "login": "CONNEXION",
-    "copyright": "Copyright © 2017 KEYCAM Tous droits réservés."
+    "copyright": "Copyright © 2017 KEYCAM Tous droits réservés.",
+    "off": "DECONNEXION"
   },
   "LOGIN": {
     "sign": "CONNECTION",

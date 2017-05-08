@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {TranslateService} from 'ng2-translate';
 import {MdDialog} from '@angular/material';
 import {LoginComponent} from './Login/login.component';
+import {Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +22,8 @@ export class AppComponent {
   ];
 
   constructor(private translate: TranslateService,
+              private cookieService: CookieService,
+              private router: Router,
               public dialog: MdDialog) {
     let userLang = navigator.language.split('-')[0];
     userLang = /(fr|en|se)/gi.test(userLang) ? userLang : 'en';
@@ -52,5 +56,11 @@ export class AppComponent {
         this.user = result;
       }
     });
+  }
+
+  logOut() {
+    this.user = null;
+    this.cookieService.removeAll();
+    this.router.navigate(['/home']);
   }
 }
