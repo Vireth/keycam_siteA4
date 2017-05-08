@@ -14,3 +14,16 @@ export class CanActivateViaAuthGuard implements CanActivate {
     return false;
   }
 }
+
+@Injectable()
+export class CantActivateViaAuthGuard implements CanActivate {
+
+  constructor(private keyCamService: KeycamService, private router: Router) {}
+
+  canActivate() {
+    if (!this.keyCamService.isLoggedIn()) { return true ; }
+
+    this.router.navigate(['/camera']);
+    return false;
+  }
+}

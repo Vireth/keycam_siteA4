@@ -13,5 +13,9 @@
     "here": "ici",
     "log": "Connection",
     "register": "S'enregister"
+  },
+  "CAMERA": {
+    "message": "Message",
+    "send": "Envoyer"
   }
 }

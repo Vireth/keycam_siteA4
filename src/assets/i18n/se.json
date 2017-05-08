@@ -13,5 +13,9 @@
     "here": "här",
     "log": "Logga in",
     "register": "Registrera"
+  },
+  "CAMERA": {
+    "message": "Meddelande",
+    "send": "Skicka"
   }
 }

@@ -6,12 +6,12 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  private url = 'http://10.0.1.6:4444/';
+  private url = 'http://192.168.1.100:4444/';
   private socket;
 
   constructor(private cookieService: CookieService) {
     const user = this.cookieService.getObject('User');
-    this.socket = io(this.url, {query: "type=parent&token=" + user['token']});
+    this.socket = io(this.url, {query: 'type=parent&token=' + user['token']});
   }
 
   getPicture() {
@@ -20,7 +20,7 @@ export class SocketService {
         observer.next(data);
       });
       return () => {
-        console.log('Picture disconnected')
+        console.log('Picture disconnected');
 
       };
     });
@@ -41,7 +41,7 @@ export class SocketService {
         observer.next(data);
       });
       return () => {
-        console.log('Text disconnected')
+        console.log('Text disconnected');
       };
     });
     return observable;

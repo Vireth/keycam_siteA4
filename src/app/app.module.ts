@@ -18,7 +18,7 @@ import {CreateComponent} from './Creat/create.component';
 import {CookieModule} from 'ngx-cookie';
 import {CameraComponent} from './Camera/camera.component';
 import { SocketService } from './Service/socket.service';
-import { CanActivateViaAuthGuard } from './Service/can-activate.service';
+import { CanActivateViaAuthGuard, CantActivateViaAuthGuard } from './Service/can-activate.service';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -63,7 +63,8 @@ export function createTranslateLoader(http: Http) {
   providers: [
     KeycamService,
     SocketService,
-    CanActivateViaAuthGuard
+    CanActivateViaAuthGuard,
+    CantActivateViaAuthGuard
   ],
   bootstrap: [AppComponent]
 })

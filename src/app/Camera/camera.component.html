@@ -1,3 +1,10 @@
-CAMERA
-<button (click)="sendText()">Send text</button>
-<button (click)="askPicture()">Ask Picture</button>
+<form #f="ngForm" (ngSubmit)="sendText(f)" novalidate>
+  <md-input-container>
+    <input mdInput name="message" type="text" ngModel required placeholder="{{ 'CAMERA.message' | translate }}">
+  </md-input-container>
+  <md-dialog-actions>
+    <button md-raised-button type="submit">{{ 'CAMERA.send' | translate }}</button>
+  </md-dialog-actions>
+</form>&nbsp;&nbsp;
+<br>
+<button md-raised-button (click)="askPicture()">Ask Picture</button>

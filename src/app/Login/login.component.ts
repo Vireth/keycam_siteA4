@@ -8,7 +8,7 @@ import {CookieService} from 'ngx-cookie';
 import {CreateComponent} from '../Creat/create.component';
 
 @Component({
-  selector: 'login',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   providers: [SnackBar],
   styleUrls: ['./login.component.css']
@@ -35,7 +35,8 @@ export class LoginComponent {
           } else {
             const user = {
               token: response.token,
-              id: response.id
+              id: response.id,
+              email: f.value.email
             };
             this.cookieService.putObject('User', user);
             this.dialogRefLogin.close(f.value.email);

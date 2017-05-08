@@ -30,6 +30,11 @@ export class AppComponent {
     translate.setDefaultLang('en');
     translate.use(userLang);
 
+    const check = this.cookieService.getObject('User');
+    if (check) {
+      this.user = check['email'];
+    }
+
     if (userLang === 'fr') {
       this.selectedValue = 'french';
     } else if (userLang === 'se') {

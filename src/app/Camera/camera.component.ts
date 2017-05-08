@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {SnackBar} from '../Information/snack-bar';
 import { SocketService } from '../Service/socket.service';
 import { KeycamService } from '../Service/keycam.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-camera',
@@ -17,19 +18,23 @@ export class CameraComponent implements OnInit, OnDestroy {
   private askPictureConnect;
 
 
-  constructor(private socketService: SocketService, private KeycamService: KeycamService, private router: Router) {}
+  constructor(private socketService: SocketService,
+              private KeycamService: KeycamService,
+              private router: Router) {}
 
   ngOnInit() {
     this.textConnect = this.socketService.getText().subscribe(text => {
       console.log(text);
-    })
+    });
     this.askPictureConnect = this.socketService.getPicture().subscribe(data => {
       console.log(data);
-    })
+    });
   }
 
-  sendText() {
-    this.socketService.sendText('hey its the angular client');
+  sendText(f: NgForm) {
+    if (f.valid === true) {
+      this.socketService.sendText(f.value.message);
+    }
   }
 
   askPicture() {
