@@ -39,7 +39,7 @@ export class LoginComponent {
             };
             this.cookieService.putObject('User', user);
             this.dialogRefLogin.close(f.value.email);
-            this.router.navigate(['/home']);
+            this.router.navigate(['/camera']);
             this.snack.open('LOGIN SUCCESS');
             this.isDisabled = !this.isDisabled;
           }

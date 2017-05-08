@@ -17,6 +17,7 @@ import {LoginComponent} from './Login/login.component';
 import {KeycamService} from './Service/keycam.service';
 import {CreateComponent} from './Creat/create.component';
 import {CookieModule} from 'ngx-cookie';
+import {CameraComponent} from './Camera/camera.component';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -29,7 +30,8 @@ export function createTranslateLoader(http: Http) {
     FooterComponent,
     TeamComponent,
     LoginComponent,
-    CreateComponent
+    CreateComponent,
+    CameraComponent
   ],
   imports: [
     CookieModule.forRoot(),
