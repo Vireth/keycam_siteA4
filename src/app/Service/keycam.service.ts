@@ -32,8 +32,8 @@ export class KeycamService {
       .catch(response => false);
   }
 
-  isLoggedIn() : boolean {
-    return this.cookieService.getObject('User') ? true : false;
+  isLoggedIn(): boolean {
+    return !!this.cookieService.getObject('User');
   }
 
   private handleError(error: any): Promise<any> {
