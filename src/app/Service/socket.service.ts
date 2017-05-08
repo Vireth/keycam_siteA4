@@ -21,7 +21,6 @@ export class SocketService {
       });
       return () => {
         console.log('Picture disconnected');
-
       };
     });
     return observable;
