@@ -61,6 +61,6 @@ export class AppComponent {
   logOut() {
     this.user = null;
     this.cookieService.removeAll();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/team']);
   }
 }
