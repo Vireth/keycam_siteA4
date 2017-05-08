@@ -1,0 +1,95 @@
+﻿.src-image {
+  display: none;
+}
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.card {
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #CCC;
+  border-radius: 8px;
+  text-align: center;
+  padding: 0;
+  background-color: #222;
+  color: white;
+  display: inline-block;
+  width: 230px;
+  margin: 5px 50px;
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.h3, h3 {
+  font-size: 24px;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+
+.card .header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  border-bottom: 1px #FFF solid;
+  z-index: 1;
+  background-color: dimgrey;
+}
+.card .avatar {
+  position: relative;
+  margin-top: 55px;
+  z-index: 100;
+}
+
+.card .avatar img {
+  width: 100px;
+  height: 100px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.content {
+  font-weight: bold;
+}
+
+.card-desc {
+  color: darkgray;
+  margin: 8px 0;
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}
+
+.active>a {
+  color: black !important;
+  background-color: white !important;
+}
