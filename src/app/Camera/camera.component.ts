@@ -16,14 +16,12 @@ export class CameraComponent implements OnInit, OnDestroy {
 
   private textConnect;
   private askPictureConnect;
-  message123 = '';
+  private askSwitch;
+  private getPlayedSong;
+  private getPlaylist;
+  messageText = '';
 
-  history = [
-    {
-      name: 'Vireth.com',
-      updated: new Date('06/20/17'),
-    }
-  ];
+  history = [];
 
   tiles = [
     {text: 'panel', cols: 1, rows: 3, color: 'lightblue'},
@@ -49,26 +47,64 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.askPictureConnect = this.socketService.getPicture().subscribe(data => {
       console.log(data);
     });
+    this.askSwitch = this.socketService.getSwitchCamera().subscribe(data => {
+      console.log(data);
+    });
+    this.getPlaylist = this.socketService.getPlaylist().subscribe(data => {
+      console.log(data);
+    });
+    this.getPlayedSong = this.socketService.getPlayedSong().subscribe(data => {
+      console.log(data);
+    });
+    this.socketService.askPlaylist();
   }
 
   sendText() {
-    if (this.message123 !== '') {
-      const test = {
-        name: 'Take a picture',
-        updated: new Date('05/09/17'),
+    if (this.messageText !== '') {
+      const historyItem = {
+        name: 'Message sent to baby',
+        updated: new Date(),
       };
-      this.history.push(test);
-      this.socketService.sendText(this.message123);
+      this.history.push(historyItem);
+      this.socketService.sendText(this.messageText);
     }
   }
 
   askPicture() {
+    const historyItem = {
+        name: 'Picture asked',
+        updated: new Date(),
+      };
+    this.history.push(historyItem);
     this.socketService.askPicture();
+  }
+
+  playSong() {
+    this.socketService.playSong({ action : 'play', song : 0});
+  }
+
+  pauseSong() {
+    this.socketService.playSong({ action : 'pause', song : 0});
+  }
+
+  stopSong() {
+    this.socketService.playSong({ action : 'play', song : 0});
+  }
+
+  playNext() {
+    this.socketService.playSong({action : '', song : ''});
+  }
+
+  switchCamera() {
+    this.socketService.switchCamera();
   }
 
   ngOnDestroy() {
     this.askPictureConnect.unsubscribe();
     this.textConnect.unsubscribe();
+    this.askSwitch.unsubscribe();
+    this.getPlayedSong.unsubscribe();
+    this.getPlaylist.unsubscribe();
     this.socketService.deconnect();
   }
 

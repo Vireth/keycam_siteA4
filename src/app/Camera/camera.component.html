@@ -11,13 +11,13 @@
     <div *ngIf="tile.text === 'panel'">
       <img src="../../assets/icones/ic_skip_previous_black_48dp_1x.png"/>
       <img src="../../assets/icones/ic_stop_black_48dp_1x.png"/>
-      <img src="../../assets/icones/ic_play_arrow_black_48dp_1x.png"/>
-      <img src="../../assets/icones/ic_pause_black_48dp_1x.png"/>
-      <img src="../../assets/icones/ic_skip_next_black_48dp_1x.png"/>
+      <img (click)="playSong()" src="../../assets/icones/ic_play_arrow_black_48dp_1x.png"/>
+      <img (click)="pauseSong()" src="../../assets/icones/ic_pause_black_48dp_1x.png"/>
+      <img (click)="stopSong()" src="../../assets/icones/ic_skip_next_black_48dp_1x.png"/>
       <md-slider></md-slider>
     </div>
     <div *ngIf="tile.text === 'buttonCamera'">
-      <img src="../../assets/icones/ic_camera_alt_black_48dp_1x.png"/>
+      <img (click)="askPicture()" src="../../assets/icones/ic_camera_alt_black_48dp_1x.png"/>
     </div>
     <div *ngIf="tile.text === 'buttonListen'">
       <img src="../../assets/icones/ic_volume_up_black_48dp_1x.png"/>
@@ -27,7 +27,7 @@
     </div>
     <div *ngIf="tile.text === 'messageSpeak'">
       <md-input-container>
-        <input mdInput name="message" type="text" [(ngModel)]="message123" placeholder="{{ 'CAMERA.message' | translate }}">
+        <input mdInput name="message" type="text" [(ngModel)]="messageText" placeholder="{{ 'CAMERA.message' | translate }}">
       </md-input-container>
     </div>
     <div *ngIf="tile.text === 'history'">
@@ -36,7 +36,7 @@
         <md-list-item *ngFor="let folder of history">
           <md-icon md-list-icon></md-icon>
           <h4 md-line>{{folder.name}}</h4>
-          <p md-line> {{folder.updated | date}}</p>
+          <p md-line> {{folder.updated | date:'medium'}}</p>
         </md-list-item>
       </md-list>
     </div>
