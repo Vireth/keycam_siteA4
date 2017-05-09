@@ -20,13 +20,14 @@ export class CameraComponent implements OnInit, OnDestroy {
   tiles = [
     {text: 'panel', cols: 1, rows: 3, color: 'lightblue'},
     {text: 'lights', cols: 2, rows: 3, color: 'lightgreen'},
-    {text: 'options', cols: 1, rows: 2, color: '#DDBDF1'},
+    {text: 'options', cols: 1, rows: 1, color: '#DDBDF1'},
     {text: 'history', cols: 1, rows: 5, color: 'lightpink'},
     {text: 'blank', cols: 3, rows: 1, color: '#DDBDF1'},
     {text: 'camera', cols: 2, rows: 3, color: 'lightblue'},
     {text: 'buttonCamera', cols: 1, rows: 1, color: 'lightgreen'},
     {text: 'buttonListen', cols: 1, rows: 1, color: 'lightgreen'},
     {text: 'buttonSpeak', cols: 1, rows: 1, color: 'lightgreen'},
+    {text: 'messageSpeak', cols: 1, rows: 1, color: '#DDBDF1'}
   ];
 
   constructor(private socketService: SocketService,

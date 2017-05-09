@@ -1,21 +1,35 @@
-<form #f="ngForm" (ngSubmit)="sendText(f)" novalidate>
-  <md-input-container>
-    <input mdInput name="message" type="text" ngModel required placeholder="{{ 'CAMERA.message' | translate }}">
-  </md-input-container>&nbsp;&nbsp;
-  <button md-raised-button type="submit">{{ 'CAMERA.send' | translate }}</button>
-</form>
-<br>
-<button md-raised-button (click)="askPicture()">Ask Picture</button>
-
 <md-grid-list cols="4" rowHeight="85px">
   <md-grid-tile
     *ngFor="let tile of tiles"
     [colspan]="tile.cols"
     [rowspan]="tile.rows"
     [style.background]="tile.color">
-    <div *ngIf="tile.text === 'One'">
-      LEEEEEEL
+    <div *ngIf="tile.text === 'camera'">
+      <img src="../../assets/icones/ic_repeat_black_48dp_1x.png"/>
+      <img src="../../assets/icones/ic_call_made_black_48dp_1x.png"/>
     </div>
-    {{tile.text}}
+    <div *ngIf="tile.text === 'panel'">
+      <img src="../../assets/icones/ic_skip_previous_black_48dp_1x.png"/>
+      <img src="../../assets/icones/ic_stop_black_48dp_1x.png"/>
+      <img src="../../assets/icones/ic_play_arrow_black_48dp_1x.png"/>
+      <img src="../../assets/icones/ic_pause_black_48dp_1x.png"/>
+      <img src="../../assets/icones/ic_skip_next_black_48dp_1x.png"/>
+      <md-slider></md-slider>
+    </div>
+    <div *ngIf="tile.text === 'buttonCamera'">
+      <img src="../../assets/icones/ic_camera_alt_black_48dp_1x.png"/>
+    </div>
+    <div *ngIf="tile.text === 'buttonListen'">
+      <img src="../../assets/icones/ic_volume_up_black_48dp_1x.png"/>
+    </div>
+    <div *ngIf="tile.text === 'buttonSpeak'">
+      <img src="../../assets/icones/ic_mic_black_48dp_1x.png"/>
+    </div>
+    <div *ngIf="tile.text === 'messageSpeak'">
+      <md-input-container>
+        <input mdInput name="message" type="text" ngModel placeholder="{{ 'CAMERA.message' | translate }}">
+      </md-input-container>
+    </div>
+    <!--{{tile.text}}-->
   </md-grid-tile>
 </md-grid-list>
