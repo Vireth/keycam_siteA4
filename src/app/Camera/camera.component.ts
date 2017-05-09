@@ -18,10 +18,15 @@ export class CameraComponent implements OnInit, OnDestroy {
   private askPictureConnect;
 
   tiles = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
+    {text: 'One', cols: 1, rows: 3, color: 'lightblue'},
+    {text: 'Two', cols: 2, rows: 3, color: 'lightgreen'},
+    {text: 'Three', cols: 1, rows: 2, color: '#DDBDF1'},
+    {text: 'Three', cols: 1, rows: 5, color: 'lightpink'},
+    {text: 'Two', cols: 3, rows: 1, color: '#DDBDF1'},
+    {text: 'One', cols: 1, rows: 3, color: 'lightblue'},
+    {text: 'Two', cols: 2, rows: 1, color: 'lightgreen'},
+    {text: 'Two', cols: 2, rows: 1, color: 'lightgreen'},
+    {text: 'Two', cols: 2, rows: 1, color: 'lightgreen'},
   ];
 
   constructor(private socketService: SocketService,
