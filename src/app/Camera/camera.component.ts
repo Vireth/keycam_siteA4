@@ -16,6 +16,14 @@ export class CameraComponent implements OnInit, OnDestroy {
 
   private textConnect;
   private askPictureConnect;
+  message123 = '';
+
+  history = [
+    {
+      name: 'Vireth.com',
+      updated: new Date('06/20/17'),
+    }
+  ];
 
   tiles = [
     {text: 'panel', cols: 1, rows: 3, color: 'lightblue'},
@@ -43,9 +51,14 @@ export class CameraComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendText(f: NgForm) {
-    if (f.valid === true) {
-      this.socketService.sendText(f.value.message);
+  sendText() {
+    if (this.message123 !== '') {
+      const test = {
+        name: 'Take a picture',
+        updated: new Date('05/09/17'),
+      };
+      this.history.push(test);
+      this.socketService.sendText(this.message123);
     }
   }
 
