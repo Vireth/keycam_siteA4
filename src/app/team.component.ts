@@ -1,4 +1,7 @@
 ﻿import { Component } from '@angular/core';
+import { Headers, Http } from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-team',
@@ -6,7 +9,10 @@
   styleUrls: ['./team.component.css']
 })
 export class TeamComponent {
-  data: any[] = [
+  private url = 'http://10.0.1.6:3333/api/team/';
+  private headers = new Headers({ 'Content-Type': 'application/json' });
+
+  other: any[] = [
     {
       'person': [
         {
@@ -63,5 +69,10 @@ export class TeamComponent {
     }
   ];
 
-  constructor() {}
+  constructor(private http: Http) {
+    this.http.post(this.url, null, { headers: this.headers })
+      .toPromise()
+      .then(data => data.json())
+      .catch(data => false);
+  }
 }
