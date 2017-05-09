@@ -13,6 +13,9 @@
     [colspan]="tile.cols"
     [rowspan]="tile.rows"
     [style.background]="tile.color">
+    <div *ngIf="tile.text === 'One'">
+      LEEEEEEL
+    </div>
     {{tile.text}}
   </md-grid-tile>
 </md-grid-list>

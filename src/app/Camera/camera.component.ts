@@ -18,15 +18,15 @@ export class CameraComponent implements OnInit, OnDestroy {
   private askPictureConnect;
 
   tiles = [
-    {text: 'One', cols: 1, rows: 3, color: 'lightblue'},
-    {text: 'Two', cols: 2, rows: 3, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 2, color: '#DDBDF1'},
-    {text: 'Three', cols: 1, rows: 5, color: 'lightpink'},
-    {text: 'Two', cols: 3, rows: 1, color: '#DDBDF1'},
-    {text: 'One', cols: 1, rows: 3, color: 'lightblue'},
-    {text: 'Two', cols: 2, rows: 1, color: 'lightgreen'},
-    {text: 'Two', cols: 2, rows: 1, color: 'lightgreen'},
-    {text: 'Two', cols: 2, rows: 1, color: 'lightgreen'},
+    {text: 'panel', cols: 1, rows: 3, color: 'lightblue'},
+    {text: 'lights', cols: 2, rows: 3, color: 'lightgreen'},
+    {text: 'options', cols: 1, rows: 2, color: '#DDBDF1'},
+    {text: 'history', cols: 1, rows: 5, color: 'lightpink'},
+    {text: 'blank', cols: 3, rows: 1, color: '#DDBDF1'},
+    {text: 'camera', cols: 2, rows: 3, color: 'lightblue'},
+    {text: 'buttonCamera', cols: 1, rows: 1, color: 'lightgreen'},
+    {text: 'buttonListen', cols: 1, rows: 1, color: 'lightgreen'},
+    {text: 'buttonSpeak', cols: 1, rows: 1, color: 'lightgreen'},
   ];
 
   constructor(private socketService: SocketService,
