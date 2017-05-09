@@ -5,8 +5,9 @@
     [rowspan]="tile.rows"
     [style.background]="tile.color">
     <div *ngIf="tile.text === 'camera'">
-      <img src="../../assets/icones/ic_repeat_black_48dp_1x.png"/>
-      <img src="../../assets/icones/ic_call_made_black_48dp_1x.png"/>
+      <!--<img src="../../assets/icones/ic_repeat_black_48dp_1x.png"/>-->
+      <!--<img src="../../assets/icones/ic_call_made_black_48dp_1x.png"/>-->
+      <img id="pictureviewer" src=""/>
     </div>
     <div *ngIf="tile.text === 'panel'">
       <img src="../../assets/icones/ic_skip_previous_black_48dp_1x.png"/>
@@ -23,7 +24,7 @@
       <img src="../../assets/icones/ic_volume_up_black_48dp_1x.png"/>
     </div>
     <div *ngIf="tile.text === 'buttonSpeak'">
-      <img (click)="sendText(message123)" type="submit" src="../../assets/icones/ic_mic_black_48dp_1x.png"/>
+      <img (click)="sendText()" type="submit" src="../../assets/icones/ic_mic_black_48dp_1x.png"/>
     </div>
     <div *ngIf="tile.text === 'messageSpeak'">
       <md-input-container>
@@ -32,7 +33,6 @@
     </div>
     <div *ngIf="tile.text === 'history'">
       <md-list>
-        <h3 md-subheader>History</h3>
         <md-list-item *ngFor="let folder of history">
           <md-icon md-list-icon></md-icon>
           <h4 md-line>{{folder.name}}</h4>

@@ -45,7 +45,10 @@ export class CameraComponent implements OnInit, OnDestroy {
       console.log(text);
     });
     this.askPictureConnect = this.socketService.getPicture().subscribe(data => {
-      console.log(data);
+      if (data) {
+        const image = document.getElementById('pictureviewer')
+          .setAttribute('src', 'data:image/png;base64,' + this.arrayBufferToBase64(data));
+      }
     });
     this.askSwitch = this.socketService.getSwitchCamera().subscribe(data => {
       console.log(data);
@@ -57,6 +60,16 @@ export class CameraComponent implements OnInit, OnDestroy {
       console.log(data);
     });
     this.socketService.askPlaylist();
+  }
+
+  arrayBufferToBase64( buffer ) {
+    let binary = '';
+    const bytes = new Uint8Array( buffer );
+    const len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode( bytes[ i ] );
+    }
+    return window.btoa( binary );
   }
 
   sendText() {
