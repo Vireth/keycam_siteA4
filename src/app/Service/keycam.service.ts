@@ -32,6 +32,15 @@ export class KeycamService {
       .catch(response => false);
   }
 
+  team(): Promise<any> {
+    const url = `${this.url + 'teams'}`;
+
+    return this.http.get(url, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json())
+      .catch(response => false);
+  }
+
   isLoggedIn(): boolean {
     return !!this.cookieService.getObject('User');
   }
