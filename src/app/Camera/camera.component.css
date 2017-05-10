@@ -1,16 +1,25 @@
 .sliderPanel {
-  position: absolute;
+  /*position: absolute;*/
   left: 50%;
   margin-right: -50%;
   margin-top: 5%;
   transform: translate(-50%, -50%);
 }
 
-.textSong {
+.border2 {
+  border:5px ridge black;
+}
+
+.micro {
+  display: block;
   position: absolute;
+}
+
+.textSong {
+  /*position: absolute;*/
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%);
+  /*transform: translate(-50%, -50%);*/
 }
 
 .backCamera {

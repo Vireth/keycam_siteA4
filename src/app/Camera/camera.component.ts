@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import {SnackBar} from '../Information/snack-bar';
 import { AppComponent } from '../app.component';
@@ -9,14 +9,14 @@ import {PlaylistComponent} from './playlist.component';
 import {MdDialog} from '@angular/material';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-camera',
-  providers: [SnackBar],
+  providers: [SnackBar, PlaylistComponent],
   templateUrl: './camera.component.html',
   styleUrls: ['./camera.component.css']
 })
 
 export class CameraComponent implements OnInit, OnDestroy {
-
   private textConnect;
   private askPictureConnect;
   private askSwitch;
@@ -37,43 +37,74 @@ export class CameraComponent implements OnInit, OnDestroy {
   history = [];
 
   tiles = [
-    {text: 'panel', cols: 1, rows: 3},
+    {text: 'panel', cols: 1, rows: 3 , color: '#DDBDF1'},
     {text: 'lights', cols: 2, rows: 3, color: 'lightgreen'},
-    {text: 'options', cols: 1, rows: 1, color: '#DDBDF1'},
-    {text: 'history', cols: 1, rows: 5},
-    {text: 'blank', cols: 3, rows: 1, color: '#DDBDF1'},
-    {text: 'camera', cols: 2, rows: 3},
-    {text: 'buttonCamera', cols: 1, rows: 1},
-    {text: 'buttonListen', cols: 1, rows: 1},
-    {text: 'buttonSpeak', cols: 1, rows: 1},
-    {text: 'messageSpeak', cols: 1, rows: 1}
+    {text: 'history', cols: 1, rows: 6, color: '#AABDF1'},
+    {text: 'camera', cols: 2, rows: 4, color: '#CCDDF1'},
+    {text: 'blank', cols: 1, rows: 1, color: '#CCBDF1'},
+    {text: 'buttonCamera', cols: 1, rows: 1, color: '#ABBDF1'},
+    {text: 'buttonListen', cols: 1, rows: 1, color: '#AADDF1'},
+    {text: 'buttonSpeak', cols: 2, rows: 1, color: '#FFBDF1'},
+    // {text: 'messageSpeak', cols: 1, rows: 1, color: '#FFDDF1'}
   ];
 
   constructor(private socketService: SocketService,
               private KeycamService: KeycamService,
               private router: Router,
               public dialog: MdDialog,
-              private app: AppComponent) {}
+              private app: AppComponent,
+              private  Plist: PlaylistComponent) {}
 
   ngOnInit() {
     this.app.connectSocket();
     this.textConnect = this.socketService.getText().subscribe(text => {
-      console.log(text);
+      if (text) {
+        const historyItem = {
+          name: 'Get Text',
+          updated: new Date(),
+        };
+        this.Mypush(historyItem);
+      }
     });
     this.askPictureConnect = this.socketService.getPicture().subscribe(data => {
       if (data) {
+        const historyItem = {
+          name: 'Receive Photo',
+          updated: new Date(),
+        };
+        this.Mypush(historyItem);
         const image = document.getElementById('pictureviewer')
           .setAttribute('src', 'data:image/png;base64,' + this.arrayBufferToBase64(data));
       }
     });
     this.askSwitch = this.socketService.getSwitchCamera().subscribe(data => {
-      console.log(data);
+      if (data) {
+        const historyItem = {
+          name: 'Switch Photo',
+          updated: new Date(),
+        };
+        this.Mypush(historyItem);
+      }
     });
     this.getPlaylist = this.socketService.getPlaylist().subscribe(data => {
       this.playlist = data;
+      this.Plist.set_playlist(data);
+      if (data) {
+        const historyItem = {
+          name: 'Playlist load',
+          updated: new Date(),
+        };
+        this.Mypush(historyItem);
+      }
     });
     this.getPlayedSong = this.socketService.getPlayedSong().subscribe(data => {
-      console.log(data);
+      if (data) {
+        const historyItem = {
+          name: 'Played Song',
+          updated: new Date(),
+        };
+        this.Mypush(historyItem);
+      }
     });
     this.socketService.askPlaylist();
   }
@@ -94,7 +125,7 @@ export class CameraComponent implements OnInit, OnDestroy {
         name: 'Message sent to baby',
         updated: new Date(),
       };
-      this.history.push(historyItem);
+      this.Mypush(historyItem);
       this.socketService.sendText(this.messageText);
     }
   }
@@ -104,7 +135,7 @@ export class CameraComponent implements OnInit, OnDestroy {
         name: 'Picture asked',
         updated: new Date(),
       };
-    this.history.push(historyItem);
+    this.Mypush(historyItem);
     this.socketService.askPicture();
   }
 
@@ -171,7 +202,14 @@ export class CameraComponent implements OnInit, OnDestroy {
 
   openPlaylist() {
     this.dialogRefPlaylist = this.dialog.open(PlaylistComponent);
-    console.log('TEST');
+  }
+
+  Mypush(historyItem) {
+    console.log(this.history.length);
+    if (this.history.length === 6) {
+      this.history.shift();
+    }
+    this.history.push(historyItem);
   }
 
   ngOnDestroy() {

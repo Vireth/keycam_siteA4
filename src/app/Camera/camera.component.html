@@ -9,7 +9,7 @@
       <img class="fullScreen" src="../../assets/icones/ic_fullscreen_black_48dp_1x.png"/>
       <img id="pictureviewer" src=""/>
     </div>
-    <div *ngIf="tile.text === 'panel'">
+    <div *ngIf="tile.text === 'panel'" class="border2">
       <div class="textSong">{{getCurrentSong()}}</div><br>
       <img (click)="playBefore()" src="../../assets/icones/ic_skip_previous_black_48dp_1x.png"/>
       <img (click)="stopSong()" *ngIf="stop" src="../../assets/icones/ic_stop_black_48dp_1x.png"/>
@@ -26,18 +26,15 @@
     <div *ngIf="tile.text === 'buttonListen'">
       <img src="../../assets/icones/ic_volume_up_black_48dp_1x.png"/>
     </div>
-    <div *ngIf="tile.text === 'buttonSpeak'">
-      <img (click)="sendText()" type="submit" src="../../assets/icones/ic_mic_black_48dp_1x.png"/>
-    </div>
-    <div *ngIf="tile.text === 'messageSpeak'">
+    <div *ngIf="tile.text === 'buttonSpeak'" class="border2">
+      <img (click)="sendText()" type="submit" src="../../assets/icones/ic_mic_black_48dp_1x.png"/>&nbsp;&nbsp;
       <md-input-container>
         <input mdInput name="message" type="text" [(ngModel)]="messageText" placeholder="{{ 'CAMERA.message' | translate }}">
       </md-input-container>
     </div>
-    <div *ngIf="tile.text === 'history'">
+    <div *ngIf="tile.text === 'history'" class="border2">
       <md-list>
         <md-list-item *ngFor="let folder of history">
-          <md-icon md-list-icon></md-icon>
           <h4 md-line>{{folder.name}}</h4>
           <p md-line> {{folder.updated | date:'medium'}}</p>
         </md-list-item>

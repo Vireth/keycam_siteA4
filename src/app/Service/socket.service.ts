@@ -6,7 +6,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  private url = 'http://10.0.1.6:4444';
+  private url = 'http://192.168.1.101:4444';
   private socket;
   private user;
   public connected = false;
