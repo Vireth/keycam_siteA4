@@ -20,20 +20,23 @@ export class CameraComponent implements OnInit, OnDestroy {
   private getPlayedSong;
   private getPlaylist;
   messageText = '';
+  play = false;
+  pause = false;
+  stop= false;
 
   history = [];
 
   tiles = [
-    {text: 'panel', cols: 1, rows: 3, color: 'lightblue'},
+    {text: 'panel', cols: 1, rows: 3},
     {text: 'lights', cols: 2, rows: 3, color: 'lightgreen'},
     {text: 'options', cols: 1, rows: 1, color: '#DDBDF1'},
-    {text: 'history', cols: 1, rows: 5, color: 'lightpink'},
+    {text: 'history', cols: 1, rows: 5},
     {text: 'blank', cols: 3, rows: 1, color: '#DDBDF1'},
-    {text: 'camera', cols: 2, rows: 3, color: 'lightblue'},
-    {text: 'buttonCamera', cols: 1, rows: 1, color: 'lightgreen'},
-    {text: 'buttonListen', cols: 1, rows: 1, color: 'lightgreen'},
-    {text: 'buttonSpeak', cols: 1, rows: 1, color: 'lightgreen'},
-    {text: 'messageSpeak', cols: 1, rows: 1, color: '#DDBDF1'}
+    {text: 'camera', cols: 2, rows: 3},
+    {text: 'buttonCamera', cols: 1, rows: 1},
+    {text: 'buttonListen', cols: 1, rows: 1},
+    {text: 'buttonSpeak', cols: 1, rows: 1},
+    {text: 'messageSpeak', cols: 1, rows: 1}
   ];
 
   constructor(private socketService: SocketService,
@@ -94,14 +97,26 @@ export class CameraComponent implements OnInit, OnDestroy {
 
   playSong() {
     this.socketService.playSong({ action : 'play', song : 0});
+    this.play = true;
+    this.pause = true;
+    this.stop = true;
   }
 
   pauseSong() {
     this.socketService.playSong({ action : 'pause', song : 0});
+    this.pause = false;
+    this.play = false;
   }
 
   stopSong() {
     this.socketService.playSong({ action : 'play', song : 0});
+    this.play = false;
+    this.pause = false;
+    this.stop = false;
+  }
+
+  playBefore() {
+    this.socketService.playSong({action : '', song : ''});
   }
 
   playNext() {
