@@ -20,6 +20,7 @@ import {CookieModule} from 'ngx-cookie';
 import {CameraComponent} from './Camera/camera.component';
 import { SocketService } from './Service/socket.service';
 import { CanActivateViaAuthGuard, CantActivateViaAuthGuard } from './Service/can-activate.service';
+import {PlaylistComponent} from './Camera/playlist.component';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -31,6 +32,7 @@ export function createTranslateLoader(http: Http) {
     FooterComponent,
     TeamComponent,
     LoginComponent,
+    PlaylistComponent,
     CreateComponent,
     CameraComponent
   ],
@@ -64,7 +66,8 @@ export function createTranslateLoader(http: Http) {
     })
   ],
   entryComponents: [
-    LoginComponent
+    LoginComponent,
+    PlaylistComponent
   ],
   providers: [
     KeycamService,
