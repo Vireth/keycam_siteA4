@@ -6,6 +6,7 @@ import {KeycamService} from '../Service/keycam.service';
 import {SnackBar} from '../Information/snack-bar';
 import {CookieService} from 'ngx-cookie';
 import {CreateComponent} from '../Creat/create.component';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',

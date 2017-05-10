@@ -6,12 +6,44 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  private url = 'http://192.168.1.100:4444';
+  private url = 'http://10.0.1.6:4444';
   private socket;
+  private user;
+  public connected = false;
 
   constructor(private cookieService: CookieService) {
-    const user = this.cookieService.getObject('User');
-    this.socket = io(this.url, {query: 'type=parent&token=' + user['token']});
+    this.user = this.cookieService.getObject('User');
+  }
+
+  connect() {
+    if (!this.connected) {
+      this.socket = io(this.url, {query: 'type=parent&token=' + this.user['token']});
+      this.connected = true;
+    }
+  }
+
+  getBabyState() {
+    const observable = new Observable(observer => {
+      this.socket.on('babyState', (data) => {
+        observer.next(data);
+      });
+      return () => {
+        console.log('babyState disconnected');
+      };
+    });
+    return observable;
+  }
+
+  getBattery() {
+    const observable = new Observable(observer => {
+      this.socket.on('battery', (data) => {
+        observer.next(data);
+      });
+      return () => {
+        console.log('battery disconnected');
+      };
+    });
+    return observable;
   }
 
   getPicture() {
@@ -101,6 +133,9 @@ export class SocketService {
   }
 
   deconnect() {
-    this.socket.disconnect();
+    if (this.connected) {
+      this.socket.disconnect();
+      this.connected = false;
+    }
   }
 }

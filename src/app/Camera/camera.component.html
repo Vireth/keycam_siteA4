@@ -5,11 +5,12 @@
     [rowspan]="tile.rows"
     [style.background]="tile.color">
     <div *ngIf="tile.text === 'camera'">
-      <img class="backCamera" src="../../assets/icones/ic_repeat_black_48dp_1x.png"/>
+      <img (click)="switchCamera()" class="backCamera" src="../../assets/icones/ic_repeat_black_48dp_1x.png"/>
       <img class="fullScreen" src="../../assets/icones/ic_fullscreen_black_48dp_1x.png"/>
       <img id="pictureviewer" src=""/>
     </div>
     <div *ngIf="tile.text === 'panel'">
+      <p>{{getCurrentSong()}}</p>
       <img (click)="playBefore()" src="../../assets/icones/ic_skip_previous_black_48dp_1x.png"/>
       <img (click)="stopSong()" *ngIf="stop" src="../../assets/icones/ic_stop_black_48dp_1x.png"/>
       <img (click)="playSong()" *ngIf="!play" src="../../assets/icones/ic_play_arrow_black_48dp_1x.png"/>
