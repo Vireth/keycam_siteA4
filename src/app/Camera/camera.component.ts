@@ -31,6 +31,8 @@ export class CameraComponent implements OnInit, OnDestroy {
   pause = false;
   stop= false;
   isPlaying = false;
+  isPaused = false;
+  isStopped = true;
 
   history = [];
 
@@ -112,6 +114,8 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.pause = true;
     this.stop = true;
     this.isPlaying = false;
+    this.isPaused = false;
+    this.isStopped = false;
   }
 
   pauseSong() {
@@ -119,6 +123,8 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.pause = false;
     this.play = false;
     this.isPlaying = false;
+    this.isPaused = true;
+    this.isStopped = false;
   }
 
   stopSong() {
@@ -127,6 +133,8 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.pause = false;
     this.stop = false;
     this.isPlaying = false;
+    this.isPaused = false;
+    this.isStopped = true;
   }
 
   playBefore() {
@@ -152,7 +160,7 @@ export class CameraComponent implements OnInit, OnDestroy {
   }
 
   checkMoveSong() {
-    if (this.isPlaying || !this.pause) {
+    if (this.isPlaying || this.isPaused) {
       this.socketService.playSong({action : 'stop', song : this.songPos});
     }
   }
