@@ -10,12 +10,13 @@
       <img id="pictureviewer" src=""/>
     </div>
     <div *ngIf="tile.text === 'panel'">
-      <p>{{getCurrentSong()}}</p>
+      <div class="textSong">{{getCurrentSong()}}</div><br>
       <img (click)="playBefore()" src="../../assets/icones/ic_skip_previous_black_48dp_1x.png"/>
       <img (click)="stopSong()" *ngIf="stop" src="../../assets/icones/ic_stop_black_48dp_1x.png"/>
       <img (click)="playSong()" *ngIf="!play" src="../../assets/icones/ic_play_arrow_black_48dp_1x.png"/>
       <img (click)="pauseSong()" *ngIf="pause" src="../../assets/icones/ic_pause_black_48dp_1x.png"/>
       <img (click)="playNext()" src="../../assets/icones/ic_skip_next_black_48dp_1x.png"/>
+      <img (click)="openPlaylist()" src="../../assets/icones/ic_list_black_48dp_1x.png"/>
       <br>
       <md-slider class="sliderPanel"></md-slider>
     </div>

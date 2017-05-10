@@ -5,6 +5,8 @@ import { AppComponent } from '../app.component';
 import { SocketService } from '../Service/socket.service';
 import { KeycamService } from '../Service/keycam.service';
 import {NgForm} from '@angular/forms';
+import {PlaylistComponent} from './playlist.component';
+import {MdDialog} from '@angular/material';
 
 @Component({
   selector: 'app-camera',
@@ -23,6 +25,7 @@ export class CameraComponent implements OnInit, OnDestroy {
   private playlist = {};
   private currentSong = '';
   private songPos = 0;
+  dialogRefPlaylist;
   messageText = '';
   play = false;
   pause = false;
@@ -47,6 +50,7 @@ export class CameraComponent implements OnInit, OnDestroy {
   constructor(private socketService: SocketService,
               private KeycamService: KeycamService,
               private router: Router,
+              public dialog: MdDialog,
               private app: AppComponent) {}
 
   ngOnInit() {
@@ -130,7 +134,7 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.songPos = this.songPos === 0 ? Object.keys(this.playlist).length - 1 : this.songPos - 1;
     console.log(this.songPos);
     if (this.play) {
-      this.socketService.playSong({action : 'play', song : this.songPos}); 
+      this.socketService.playSong({action : 'play', song : this.songPos});
     }
   }
 
@@ -139,7 +143,7 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.songPos = this.songPos === (Object.keys(this.playlist).length - 1) ? 0 : this.songPos + 1;
     console.log(this.songPos);
     if (this.isPlaying) {
-      this.socketService.playSong({action : 'play', song : this.songPos}); 
+      this.socketService.playSong({action : 'play', song : this.songPos});
     }
   }
 
@@ -155,6 +159,11 @@ export class CameraComponent implements OnInit, OnDestroy {
 
   getCurrentSong() {
     return this.playlist[this.songPos];
+  }
+
+  openPlaylist() {
+    this.dialogRefPlaylist = this.dialog.open(PlaylistComponent);
+    console.log('TEST');
   }
 
   ngOnDestroy() {
