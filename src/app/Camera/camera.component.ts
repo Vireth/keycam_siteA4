@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import {SnackBar} from '../Information/snack-bar';
+import { AppComponent } from '../app.component';
 import { SocketService } from '../Service/socket.service';
 import { KeycamService } from '../Service/keycam.service';
 import {NgForm} from '@angular/forms';
@@ -19,10 +20,14 @@ export class CameraComponent implements OnInit, OnDestroy {
   private askSwitch;
   private getPlayedSong;
   private getPlaylist;
+  private playlist = {};
+  private currentSong = '';
+  private songPos = 0;
   messageText = '';
   play = false;
   pause = false;
   stop= false;
+  isPlaying = false;
 
   history = [];
 
@@ -41,9 +46,11 @@ export class CameraComponent implements OnInit, OnDestroy {
 
   constructor(private socketService: SocketService,
               private KeycamService: KeycamService,
-              private router: Router) {}
+              private router: Router,
+              private app: AppComponent) {}
 
   ngOnInit() {
+    this.app.connectSocket();
     this.textConnect = this.socketService.getText().subscribe(text => {
       console.log(text);
     });
@@ -57,7 +64,7 @@ export class CameraComponent implements OnInit, OnDestroy {
       console.log(data);
     });
     this.getPlaylist = this.socketService.getPlaylist().subscribe(data => {
-      console.log(data);
+      this.playlist = data;
     });
     this.getPlayedSong = this.socketService.getPlayedSong().subscribe(data => {
       console.log(data);
@@ -96,35 +103,58 @@ export class CameraComponent implements OnInit, OnDestroy {
   }
 
   playSong() {
-    this.socketService.playSong({ action : 'play', song : 0});
+    this.socketService.playSong({ action : 'play', song : this.songPos});
     this.play = true;
     this.pause = true;
     this.stop = true;
+    this.isPlaying = false;
   }
 
   pauseSong() {
-    this.socketService.playSong({ action : 'pause', song : 0});
+    this.socketService.playSong({ action : 'pause', song : this.songPos});
     this.pause = false;
     this.play = false;
+    this.isPlaying = false;
   }
 
   stopSong() {
-    this.socketService.playSong({ action : 'play', song : 0});
+    this.socketService.playSong({ action : 'stop', song : this.songPos});
     this.play = false;
     this.pause = false;
     this.stop = false;
+    this.isPlaying = false;
   }
 
   playBefore() {
-    this.socketService.playSong({action : '', song : ''});
+    this.checkMoveSong();
+    this.songPos = this.songPos === 0 ? Object.keys(this.playlist).length - 1 : this.songPos - 1;
+    console.log(this.songPos);
+    if (this.play) {
+      this.socketService.playSong({action : 'play', song : this.songPos}); 
+    }
   }
 
   playNext() {
-    this.socketService.playSong({action : '', song : ''});
+    this.checkMoveSong();
+    this.songPos = this.songPos === (Object.keys(this.playlist).length - 1) ? 0 : this.songPos + 1;
+    console.log(this.songPos);
+    if (this.isPlaying) {
+      this.socketService.playSong({action : 'play', song : this.songPos}); 
+    }
   }
 
   switchCamera() {
     this.socketService.switchCamera();
+  }
+
+  checkMoveSong() {
+    if (this.isPlaying || !this.pause) {
+      this.socketService.playSong({action : 'stop', song : this.songPos});
+    }
+  }
+
+  getCurrentSong() {
+    return this.playlist[this.songPos];
   }
 
   ngOnDestroy() {
@@ -133,7 +163,6 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.askSwitch.unsubscribe();
     this.getPlayedSong.unsubscribe();
     this.getPlaylist.unsubscribe();
-    this.socketService.deconnect();
   }
 
 }
