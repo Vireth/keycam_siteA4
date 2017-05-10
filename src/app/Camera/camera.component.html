@@ -1,0 +1,46 @@
+<md-grid-list cols="4" rowHeight="80px">
+  <md-grid-tile
+    *ngFor="let tile of tiles"
+    [colspan]="tile.cols"
+    [rowspan]="tile.rows"
+    [style.background]="tile.color">
+    <div *ngIf="tile.text === 'camera'">
+      <img class="backCamera" src="../../assets/icones/ic_repeat_black_48dp_1x.png"/>
+      <img class="fullScreen" src="../../assets/icones/ic_fullscreen_black_48dp_1x.png"/>
+      <img id="pictureviewer" src=""/>
+    </div>
+    <div *ngIf="tile.text === 'panel'">
+      <img (click)="playBefore()" src="../../assets/icones/ic_skip_previous_black_48dp_1x.png"/>
+      <img (click)="stopSong()" *ngIf="stop" src="../../assets/icones/ic_stop_black_48dp_1x.png"/>
+      <img (click)="playSong()" *ngIf="!play" src="../../assets/icones/ic_play_arrow_black_48dp_1x.png"/>
+      <img (click)="pauseSong()" *ngIf="pause" src="../../assets/icones/ic_pause_black_48dp_1x.png"/>
+      <img (click)="playNext()" src="../../assets/icones/ic_skip_next_black_48dp_1x.png"/>
+      <br>
+      <md-slider class="sliderPanel"></md-slider>
+    </div>
+    <div *ngIf="tile.text === 'buttonCamera'">
+      <img (click)="askPicture()" src="../../assets/icones/ic_camera_alt_black_48dp_1x.png"/>
+    </div>
+    <div *ngIf="tile.text === 'buttonListen'">
+      <img src="../../assets/icones/ic_volume_up_black_48dp_1x.png"/>
+    </div>
+    <div *ngIf="tile.text === 'buttonSpeak'">
+      <img (click)="sendText()" type="submit" src="../../assets/icones/ic_mic_black_48dp_1x.png"/>
+    </div>
+    <div *ngIf="tile.text === 'messageSpeak'">
+      <md-input-container>
+        <input mdInput name="message" type="text" [(ngModel)]="messageText" placeholder="{{ 'CAMERA.message' | translate }}">
+      </md-input-container>
+    </div>
+    <div *ngIf="tile.text === 'history'">
+      <md-list>
+        <md-list-item *ngFor="let folder of history">
+          <md-icon md-list-icon></md-icon>
+          <h4 md-line>{{folder.name}}</h4>
+          <p md-line> {{folder.updated | date:'medium'}}</p>
+        </md-list-item>
+      </md-list>
+    </div>
+    <!--{{tile.text}}-->
+  </md-grid-tile>
+</md-grid-list>

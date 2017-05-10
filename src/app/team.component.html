@@ -1,33 +1,25 @@
-﻿<!--<div class="row center"> <!-- SITE & API -- >
-  <div *ng-for="let person of team.web" class="card">
+﻿<h1 style="text-align: center">{{ 'MENU.team' | translate }}</h1>
+<br>
+<!--<div class="row center" *ngFor="let group of data">
+  <div *ngFor="let person of group.person" class="card">
     <div class="header-bg">
       <h3>{{person.name}}</h3>
     </div>
     <div class="avatar">
-      <img src="{{'img/team/' + person.img}}" alt="keysim" />
+      <img src="{{'../assets/team/' + person.img}}" alt="keysim" />
     </div>
     <p class="card-desc">{{person.student_id}}<br>{{person.role}}</p>
   </div>
 </div>
-<div class="row center"><!-- Android -- >
-  <div class="card" *ng-for="let person of team.android">
+-->
+<div class="row center">
+  <div *ngFor="let person of other" class="card">
     <div class="header-bg">
       <h3>{{person.name}}</h3>
     </div>
     <div class="avatar">
-      <img src="{{'img/team/' + person.img}}" alt="keysim" />
+      <img src="{{'../assets/team/' + person.img}}" alt="keysim" />
     </div>
     <p class="card-desc">{{person.student_id}}<br>{{person.role}}</p>
   </div>
 </div>
-<div class="row center"><!-- Video -- >
-  <div class="card" *ng-for="let person of team">
-    <div class="header-bg">
-      <h3>{{person.name}}</h3>
-    </div>
-    <div class="avatar">
-      <img src="{{'img/team/' + person.img}}" alt="keysim" />
-    </div>
-    <p class="card-desc">{{person.student_id}}<br>{{person.role}}</p>
-  </div>
-</div>-->

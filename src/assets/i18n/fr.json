@@ -1,8 +1,9 @@
 {
   "MENU": {
-    "team": "L'équipe",
-    "login": "Connexion",
-    "copyright": "Copyright © 2017 KEYCAM Tous droits réservés."
+    "team": "L'EQUIPE",
+    "login": "CONNEXION",
+    "copyright": "Copyright © 2017 KEYCAM Tous droits réservés.",
+    "off": "DECONNEXION"
   },
   "LOGIN": {
     "sign": "CONNECTION",
@@ -12,5 +13,9 @@
     "here": "ici",
     "log": "Connection",
     "register": "S'enregister"
+  },
+  "CAMERA": {
+    "message": "Message",
+    "send": "Envoyer"
   }
 }

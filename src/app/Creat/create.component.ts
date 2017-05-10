@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MdDialogRef} from '@angular/material';
-import {Router} from '@angular/router';
 import {KeycamService} from '../Service/keycam.service';
 import {SnackBar} from '../Information/snack-bar';
 

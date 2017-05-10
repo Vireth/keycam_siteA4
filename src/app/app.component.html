@@ -1,5 +1,5 @@
 <md-toolbar color="primary" class="headToolbar">
-  <button md-button [routerLink]="['/home']">KeyCam</button>
+  <button md-button [routerLink]="['/team']">KeyCam</button>
 
   <img *ngIf="selectedValue == 'french'" class="flag" src="../assets/flag_fr.png"/>
   <img *ngIf="selectedValue == 'english'" class="flag" src="../assets/flag_gb.png"/>
@@ -10,11 +10,16 @@
       {{ language.viewValue }}&nbsp;&nbsp;<img src="{{ language.image }}">
     </md-option>
   </md-select>
+  &nbsp;&nbsp;
+  <img *ngIf="user" src="../assets/icones/ic_signal_wifi_off_black_48dp_1x.png"/>
+  <img *ngIf="user" src="../assets/icones/ic_wifi_black_48dp_1x.png"/>
+  <img *ngIf="user" src="../assets/icones/ic_battery_alert_black_48dp_1x.png"/>
+  <img *ngIf="user" src="../assets/icones/ic_battery_charging_full_black_48dp_1x.png"/>
 
   <span class="example-spacer"></span>
-
-  <button md-button [routerLink]="['/team']">{{ 'MENU.team' | translate }}</button>
+  <img *ngIf="user" src="../assets/icones/ic_tune_black_48dp_1x.png"/>&nbsp;&nbsp;
   <p md-button *ngIf="user; else username">{{ user }}</p>
+  <img *ngIf="user" (click)="logOut()" src="../assets/icones/ic_power_settings_new_black_48dp_1x.png"/>
 
   <ng-template #username>
     <button md-button (click)="openDialog()">{{ 'MENU.login' | translate }}</button>

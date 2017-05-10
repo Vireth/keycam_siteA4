@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import {Http, HttpModule} from '@angular/http';
 import {
   MdToolbarModule, MdButtonModule, MdSelectModule, MdDialogModule, MdInputModule,
-  MdButtonToggleModule, MdSnackBarModule, MdTooltipModule
+  MdButtonToggleModule, MdSnackBarModule, MdTooltipModule, MdGridListModule, MdProgressBarModule, MdSliderModule,
+  MdListModule, MdIconModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeComponent } from './home.component';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer.component';
 import { TeamComponent } from './team.component';
@@ -17,6 +17,10 @@ import {LoginComponent} from './Login/login.component';
 import {KeycamService} from './Service/keycam.service';
 import {CreateComponent} from './Creat/create.component';
 import {CookieModule} from 'ngx-cookie';
+import {CameraComponent} from './Camera/camera.component';
+import { SocketService } from './Service/socket.service';
+import { CanActivateViaAuthGuard, CantActivateViaAuthGuard } from './Service/can-activate.service';
+import {PlaylistComponent} from './Camera/playlist.component';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -25,11 +29,12 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     FooterComponent,
     TeamComponent,
     LoginComponent,
-    CreateComponent
+    PlaylistComponent,
+    CreateComponent,
+    CameraComponent
   ],
   imports: [
     CookieModule.forRoot(),
@@ -43,6 +48,11 @@ export function createTranslateLoader(http: Http) {
     MdToolbarModule,
     MdSelectModule,
     MdSnackBarModule,
+    MdGridListModule,
+    MdProgressBarModule,
+    MdSliderModule,
+    MdListModule,
+    MdIconModule,
     // END
     BrowserModule,
     FormsModule,
@@ -56,9 +66,16 @@ export function createTranslateLoader(http: Http) {
     })
   ],
   entryComponents: [
-    LoginComponent
+    LoginComponent,
+    PlaylistComponent
   ],
-  providers: [KeycamService],
+  providers: [
+    KeycamService,
+    SocketService,
+    CanActivateViaAuthGuard,
+    CantActivateViaAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
