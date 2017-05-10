@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+﻿import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
 import {CookieService} from 'ngx-cookie';
 
@@ -27,6 +27,15 @@ export class KeycamService {
     const data = {email: email, password: password};
 
     return this.http.post(url, data, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json())
+      .catch(response => false);
+  }
+
+  team(): Promise<any> {
+    const url = `${this.url + 'teams'}`;
+
+    return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => response.json())
       .catch(response => false);
