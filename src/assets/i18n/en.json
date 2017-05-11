@@ -16,6 +16,7 @@
   },
   "CAMERA": {
     "message": "Message",
-    "send": "Send"
+    "send": "Send",
+    "babyphone": "BABYPHONE"
   }
 }

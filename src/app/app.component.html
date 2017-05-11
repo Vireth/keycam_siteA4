@@ -18,7 +18,7 @@
 
   <span class="example-spacer"></span>
   <img *ngIf="user" src="../assets/icones/ic_tune_black_48dp_1x.png"/>&nbsp;&nbsp;
-  <p md-button *ngIf="user; else username">{{ user }}</p>
+  <p md-button *ngIf="user; else username">{{ user }}</p>&nbsp;&nbsp;
   <img *ngIf="user" (click)="logOut()" src="../assets/icones/ic_power_settings_new_black_48dp_1x.png"/>
 
   <ng-template #username>

@@ -16,6 +16,7 @@
   },
   "CAMERA": {
     "message": "Meddelande",
-    "send": "Skicka"
+    "send": "Skicka",
+    "babyphone": "BARNPASSN"
   }
 }

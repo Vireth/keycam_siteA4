@@ -4,6 +4,9 @@
     [colspan]="tile.cols"
     [rowspan]="tile.rows"
     [style.background]="tile.color">
+    <div *ngIf="tile.text === 'lights'">
+      <h5>{{ 'CAMERA.babyphone' | translate }}</h5>
+    </div>
     <div *ngIf="tile.text === 'camera'">
       <img (click)="switchCamera()" class="backCamera" src="../../assets/icones/ic_repeat_black_48dp_1x.png"/>
       <img class="fullScreen" src="../../assets/icones/ic_fullscreen_black_48dp_1x.png"/>

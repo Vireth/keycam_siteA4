@@ -33,10 +33,10 @@ export class CameraComponent implements OnInit, OnDestroy {
   history = [];
 
   tiles = [
+    {text: 'lights', cols: 2, rows: 1},
     {text: 'panel', cols: 1, rows: 3},
-    {text: 'lights', cols: 2, rows: 3},
     {text: 'history', cols: 1, rows: 6},
-    {text: 'camera', cols: 2, rows: 4},
+    {text: 'camera', cols: 2, rows: 6},
     {text: 'blank', cols: 1, rows: 1},
     {text: 'buttonCamera', cols: 1, rows: 1},
     {text: 'buttonListen', cols: 1, rows: 1},
