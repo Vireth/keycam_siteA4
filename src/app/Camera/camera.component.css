@@ -37,3 +37,9 @@ h5 {
   right: 0;
   top: 0;
 }
+
+.switchcamera {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
