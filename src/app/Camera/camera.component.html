@@ -7,7 +7,7 @@
     <div *ngIf="tile.text === 'camera'">
       <img (click)="switchCamera()" class="backCamera" src="../../assets/icones/ic_repeat_black_48dp_1x.png"/>
       <img class="fullScreen" src="../../assets/icones/ic_fullscreen_black_48dp_1x.png"/>
-      <img id="pictureviewer" src=""/>
+      <img class="imageBaby" id="pictureviewer" src="../../assets/baby.png"/>
     </div>
     <div *ngIf="tile.text === 'panel'" class="border2">
       <div class="textSong">{{getCurrentSong()}}</div><br>
@@ -26,13 +26,16 @@
     <div *ngIf="tile.text === 'buttonListen'">
       <img src="../../assets/icones/ic_volume_up_black_48dp_1x.png"/>
     </div>
-    <div *ngIf="tile.text === 'buttonSpeak'" class="border2">
-      <img (click)="sendText()" type="submit" src="../../assets/icones/ic_mic_black_48dp_1x.png"/>&nbsp;&nbsp;
+    <div *ngIf="tile.text === 'buttonSpeak'">
+      <img (click)="sendText()" type="submit" src="../../assets/icones/ic_mic_black_48dp_1x.png"/>
+      <img class="trending" src="../../assets/icones/ic_trending_flat_black_48dp_1x.png"/>
+    </div>
+    <div *ngIf="tile.text === 'messageSpeak'">
       <md-input-container>
         <input mdInput name="message" type="text" [(ngModel)]="messageText" placeholder="{{ 'CAMERA.message' | translate }}">
       </md-input-container>
     </div>
-    <div *ngIf="tile.text === 'history'" class="border2">
+    <div *ngIf="tile.text === 'history'">
       <md-list>
         <md-list-item *ngFor="let folder of history">
           <h4 md-line>{{folder.name}}</h4>
@@ -40,6 +43,5 @@
         </md-list-item>
       </md-list>
     </div>
-    <!--{{tile.text}}-->
   </md-grid-tile>
 </md-grid-list>

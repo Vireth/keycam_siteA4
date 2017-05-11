@@ -6,12 +6,14 @@ import {Component} from '@angular/core';
   templateUrl: './playlist.component.html',
 })
 export class PlaylistComponent {
-  playlists;
+  playlists = [];
 
   constructor() {}
 
   set_playlist(playlist) {
-    this.playlists = playlist;
-    console.log('playlist', this.playlists.length);
+    for (let i = 0; i < playlist.length; i++) {
+      this.playlists.push(playlist[i]);
+    }
+    console.log('TEST', this.playlists);
   }
 }

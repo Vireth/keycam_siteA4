@@ -1,10 +1,7 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {SnackBar} from '../Information/snack-bar';
 import { AppComponent } from '../app.component';
 import { SocketService } from '../Service/socket.service';
-import { KeycamService } from '../Service/keycam.service';
-import {NgForm} from '@angular/forms';
 import {PlaylistComponent} from './playlist.component';
 import {MdDialog} from '@angular/material';
 
@@ -23,7 +20,6 @@ export class CameraComponent implements OnInit, OnDestroy {
   private getPlayedSong;
   private getPlaylist;
   private playlist = {};
-  private currentSong = '';
   private songPos = 0;
   dialogRefPlaylist;
   messageText = '';
@@ -37,22 +33,21 @@ export class CameraComponent implements OnInit, OnDestroy {
   history = [];
 
   tiles = [
-    {text: 'panel', cols: 1, rows: 3 , color: '#DDBDF1'},
-    {text: 'lights', cols: 2, rows: 3, color: 'lightgreen'},
-    {text: 'history', cols: 1, rows: 6, color: '#AABDF1'},
-    {text: 'camera', cols: 2, rows: 4, color: '#CCDDF1'},
-    {text: 'blank', cols: 1, rows: 1, color: '#CCBDF1'},
-    {text: 'buttonCamera', cols: 1, rows: 1, color: '#ABBDF1'},
-    {text: 'buttonListen', cols: 1, rows: 1, color: '#AADDF1'},
-    {text: 'buttonSpeak', cols: 2, rows: 1, color: '#FFBDF1'},
-    // {text: 'messageSpeak', cols: 1, rows: 1, color: '#FFDDF1'}
+    {text: 'panel', cols: 1, rows: 3},
+    {text: 'lights', cols: 2, rows: 3},
+    {text: 'history', cols: 1, rows: 6},
+    {text: 'camera', cols: 2, rows: 4},
+    {text: 'blank', cols: 1, rows: 1},
+    {text: 'buttonCamera', cols: 1, rows: 1},
+    {text: 'buttonListen', cols: 1, rows: 1},
+    {text: 'buttonSpeak', cols: 1, rows: 1},
+    {text: 'messageSpeak', cols: 1, rows: 1}
   ];
 
   constructor(private socketService: SocketService,
-              private KeycamService: KeycamService,
-              private router: Router,
               public dialog: MdDialog,
               private app: AppComponent,
+              private snack: SnackBar,
               private  Plist: PlaylistComponent) {}
 
   ngOnInit() {
@@ -201,11 +196,14 @@ export class CameraComponent implements OnInit, OnDestroy {
   }
 
   openPlaylist() {
-    this.dialogRefPlaylist = this.dialog.open(PlaylistComponent);
+    if (Object.keys(this.playlist).length !== 0) {
+      this.dialogRefPlaylist = this.dialog.open(PlaylistComponent);
+    } else {
+      this.snack.open('PLAYLIST NOT FOUND');
+    }
   }
 
   Mypush(historyItem) {
-    console.log(this.history.length);
     if (this.history.length === 6) {
       this.history.shift();
     }
