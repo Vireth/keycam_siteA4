@@ -9,8 +9,8 @@
     </div>
     <div *ngIf="tile.text === 'camera'">
       <img (click)="switchCamera()" class="backCamera" src="../../assets/icones/ic_repeat_black_48dp_1x.png"/>
-      <img class="fullScreen" src="../../assets/icones/ic_fullscreen_black_48dp_1x.png"/>
-      <img class="imageBaby" id="pictureviewer" src="../../assets/baby.png"/>
+      <img (click)="fullscreen()" class="fullScreen" src="../../assets/icones/ic_fullscreen_black_48dp_1x.png"/>
+      <img class="imageBaby" id="pictureviewer myvideo" src="../../assets/baby.png"/>
     </div>
     <div *ngIf="tile.text === 'panel'" class="border2">
       <div class="textSong">{{getCurrentSong()}}</div><br>

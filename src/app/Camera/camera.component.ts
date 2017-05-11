@@ -235,6 +235,10 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.history.push(historyItem);
   }
 
+  fullscreen() {
+
+  }
+
   ngOnDestroy() {
     this.askPictureConnect.unsubscribe();
     this.textConnect.unsubscribe();
