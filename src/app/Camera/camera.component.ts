@@ -217,5 +217,4 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.getPlayedSong.unsubscribe();
     this.getPlaylist.unsubscribe();
   }
-
 }

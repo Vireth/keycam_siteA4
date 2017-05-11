@@ -10,22 +10,13 @@ body {
   left: 50%;
   margin-left: -237px;
   margin-top: -90px;
-  /*transform: translate(-50%, -50%);*/
-
-  /*width: 270px;*/
-  /*padding: 20px;*/
-  /*margin: 50px auto;*/
-  /*border: 1px solid #d1d1d1;*/
-
   -webkit-animation: breathing 1s ease-out infinite normal;
   animation: breathing 1s ease-out infinite normal;
+}
 
-  /*font-size: 24px;*/
-  /*background: #5885cb;*/
-  /*color: #fff;*/
-  /*-webkit-font-smoothing: antialiased;*/
-  /*border-radius: 3px;*/
-  /*text-align: center;*/
+.pulseIcone {
+  -webkit-animation: breathing 0.5s ease-out infinite normal;
+  animation: breathing 0.5s ease-out infinite normal;
 }
 
 
