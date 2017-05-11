@@ -46,6 +46,18 @@ export class SocketService {
     return observable;
   }
 
+  getLight() {
+    const observable = new Observable(observer => {
+      this.socket.on('light', (data) => {
+        observer.next(data);
+      });
+      return () => {
+        console.log('Light');
+      };
+    });
+    return observable;
+  }
+
   getPicture() {
     const observable = new Observable(observer => {
       this.socket.on('picture', (data) => {
@@ -60,6 +72,10 @@ export class SocketService {
 
   askPicture() {
     this.socket.emit('picture', this.getDataObject('picture', 'test'));
+  }
+
+  sendLight() {
+    this.socket.emit('light', this.getDataObject('light', 'test'));
   }
 
   sendText(message) {

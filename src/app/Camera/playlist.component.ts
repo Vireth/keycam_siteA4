@@ -14,6 +14,5 @@ export class PlaylistComponent {
     for (let i = 0; i < playlist.length; i++) {
       this.playlists.push(playlist[i]);
     }
-    console.log('TEST', this.playlists);
   }
 }

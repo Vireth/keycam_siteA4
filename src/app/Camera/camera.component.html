@@ -26,8 +26,9 @@
     <div *ngIf="tile.text === 'buttonCamera'">
       <img (click)="askPicture()" src="../../assets/icones/ic_camera_alt_black_48dp_1x.png"/>
     </div>
-    <div *ngIf="tile.text === 'buttonListen'">
-      <img src="../../assets/icones/ic_volume_up_black_48dp_1x.png"/>
+    <div *ngIf="tile.text === 'buttonLight'">
+      <img *ngIf="isLighted" (click)="askLight()" src="../../assets/icones/ic_highlight_black_48dp_1x.png"/>
+      <img *ngIf="!isLighted" (click)="askLight()" src="../../assets/icones/ic_highlight_black_off_48dp_1x.png"/>
     </div>
     <div *ngIf="tile.text === 'buttonSpeak'">
       <img (click)="sendText()" type="submit" src="../../assets/icones/ic_mic_black_48dp_1x.png"/>

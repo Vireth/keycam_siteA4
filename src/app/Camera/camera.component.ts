@@ -17,6 +17,7 @@ export class CameraComponent implements OnInit, OnDestroy {
   private textConnect;
   private askPictureConnect;
   private askSwitch;
+  private askLightConnect;
   private getPlayedSong;
   private getPlaylist;
   private playlist = {};
@@ -29,6 +30,7 @@ export class CameraComponent implements OnInit, OnDestroy {
   isPlaying = false;
   isPaused = false;
   isStopped = true;
+  isLighted = false;
 
   history = [];
 
@@ -39,7 +41,7 @@ export class CameraComponent implements OnInit, OnDestroy {
     {text: 'camera', cols: 2, rows: 6},
     {text: 'blank', cols: 1, rows: 1},
     {text: 'buttonCamera', cols: 1, rows: 1},
-    {text: 'buttonListen', cols: 1, rows: 1},
+    {text: 'buttonLight', cols: 1, rows: 1},
     {text: 'buttonSpeak', cols: 1, rows: 1},
     {text: 'messageSpeak', cols: 1, rows: 1}
   ];
@@ -52,6 +54,20 @@ export class CameraComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.app.connectSocket();
+    this.askLightConnect = this.socketService.getLight().subscribe(data => {
+      if (data) {
+        if (data === 'on') {
+          this.isLighted = true;
+        } else {
+          this.isLighted = false;
+        }
+        const historyItem = {
+          name: 'Light is ' + data,
+          updated: new Date(),
+        };
+        this.Mypush(historyItem);
+      }
+    });
     this.textConnect = this.socketService.getText().subscribe(text => {
       if (text) {
         const historyItem = {
@@ -112,6 +128,15 @@ export class CameraComponent implements OnInit, OnDestroy {
       binary += String.fromCharCode( bytes[ i ] );
     }
     return window.btoa( binary );
+  }
+
+  askLight() {
+    const historyItem = {
+      name: 'Ask for light',
+      updated: new Date(),
+    };
+    this.Mypush(historyItem);
+    this.socketService.sendLight();
   }
 
   sendText() {
@@ -216,5 +241,6 @@ export class CameraComponent implements OnInit, OnDestroy {
     this.askSwitch.unsubscribe();
     this.getPlayedSong.unsubscribe();
     this.getPlaylist.unsubscribe();
+    this.askLightConnect.unsubscribe();
   }
 }
