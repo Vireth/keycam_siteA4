@@ -6,7 +6,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  private url = 'http://10.0.1.6:4444'; // http://10.0.1.6:3333/api/
+  private url = 'http://192.168.1.100:4444'; // http://10.0.1.6:3333/api/
   private socket;
   private user;
   public connected = false;
@@ -135,6 +135,18 @@ export class SocketService {
       });
       return () => {
         console.log('playlist disconnected');
+      };
+    });
+    return observable;
+  }
+
+  getMood() {
+    const observable = new Observable(observer => {
+      this.socket.on('mood', (data) => {
+        observer.next(data);
+      });
+      return () => {
+        console.log('Get mood');
       };
     });
     return observable;

@@ -18,6 +18,7 @@ export class CameraComponent implements OnInit, OnDestroy {
   private askPictureConnect;
   private askSwitch;
   private askLightConnect;
+  private askMood;
   private getPlayedSong;
   private getPlaylist;
   private playlist = {};
@@ -31,6 +32,10 @@ export class CameraComponent implements OnInit, OnDestroy {
   isPaused = false;
   isStopped = true;
   isLighted = false;
+
+  isgreen = false;
+  isyellow = true;
+  isred = false;
 
   history = [];
 
@@ -54,6 +59,21 @@ export class CameraComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.app.connectSocket();
+    this.askMood = this.socketService.getMood().subscribe(data => {
+      if (data === '0') {
+        this.isgreen = true;
+        this.isyellow = false;
+        this.isred = false;
+      } else if (data === '1000') {
+        this.isgreen = false;
+        this.isyellow = true;
+        this.isred = false;
+      } else if (data === '10000') {
+        this.isgreen = false;
+        this.isyellow = false;
+        this.isred = true;
+      }
+    });
     this.askLightConnect = this.socketService.getLight().subscribe(data => {
       if (data) {
         if (data === 'on') {

@@ -40,9 +40,9 @@
       </md-input-container>
     </div>
     <div *ngIf="tile.text === 'blank'">
-      <img class="pulseIcone" src="../../assets/icones/ic_mood_black_48dp_1x.png"/>
-      <img class="pulseIcone" src="../../assets/icones/ic_sentiment_neutral_black_48dp_1x.png"/>
-      <img class="pulseIcone" src="../../assets/icones/ic_mood_bad_black_48dp_1x.png"/>
+      <img *ngIf="isgreen" class="pulseIcone" src="../../assets/icones/ic_mood_black_48dp_1x.png"/>
+      <img *ngIf="isyellow" class="pulseIcone" src="../../assets/icones/ic_sentiment_neutral_black_48dp_1x.png"/>
+      <img *ngIf="isred" class="pulseIcone" src="../../assets/icones/ic_mood_bad_black_48dp_1x.png"/>
     </div>
     <div *ngIf="tile.text === 'history'">
       <md-list>
