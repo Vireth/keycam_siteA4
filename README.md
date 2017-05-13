@@ -103,57 +103,68 @@ Full code [here](https://github.com/vireth20/keycam_siteA4/blob/master/src/app/L
 	
 Full code [here](https://github.com/vireth20/keycam_siteA4/blob/master/src/app/Login/login.component.html)
 
-## Examples Api System Test
+## Examples Service
 
-#### Flash Activity
+#### KEYCAM service ts (create)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        /.../
+       /.../
+      create(email: string, password: string): Promise<any> {
+        const url = `${this.url + 'register'}`;
+        const data = {email: email, password: password};
 
-        Boolean isFlashAvailable = getApplicationContext().getPackageManager()
-		.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+       return this.http.post(url, data, {headers: this.headers})
+          .toPromise()
+          .then(response => response.json())
+          .catch(response => false);
+      }
+      /.../
 
-        if (!isFlashAvailable) {
-            AlertDialog alert = new AlertDialog.Builder(this).create();
-            alert.setTitle("Error !!");
-            alert.setMessage("Your device doesn't support flash light!");
-            alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                    System.exit(0);
-                }
-            });
-            alert.show();
-            return;
-    }
 
-Full code [here](https://github.com/vireth20/Android_BJTU/blob/master/mobile/src/main/java/com/example/vireth/doyourphonesuck/FlashActivity.java)
+Full code [here](https://github.com/vireth20/keycam_siteA4/blob/master/src/app/Service/keycam.service.ts)
 
-## Examples Test Unitaire & UI
+#### KEYCAM service ts (connection)
+      
+      /.../
+     connection(email: string, password: string): Promise<any> {
+        const url = `${this.url + 'authenticate'}`;
+        const data = {email: email, password: password};
 
-#### Keyboard Activity
+        return this.http.post(url, data, {headers: this.headers})
+          .toPromise()
+          .then(response => response.json())
+          .catch(response => false);
+      }
+      /.../
 
-	public void KeyboardActivityTest(View view) {
-    		EditText KeyboardEditText =
-            		(EditText) findViewById(R.id.KeyboardEditText);
 
-    		String name = greetKeyboardText.getText().toString();
-    		String greeting = String.format("Sun Wukong, %s!", name);
+Full code [here](https://github.com/vireth20/keycam_siteA4/blob/master/src/app/Service/keycam.service.ts)
 
-    		TextView messageTextView =
-            	(TextView) findViewById(R.id.messageTextView);
 
-    		messageTextView.setText(greeting);
-	}
+## Examples Camera with socket IO
 
-Full code [here](https://github.com/vireth20/Android_BJTU/blob/master/mobile/src/main/java/com/example/vireth/doyourphonesuck/Keyboard.java)
+#### Camera component ts (askPicture)
+
+    /.../
+	  this.askPictureConnect = this.socketService.getPicture().subscribe(data => {
+        if (data) {
+          const historyItem = {
+            name: 'Receive Photo',
+            updated: new Date(),
+          };
+          this.Mypush(historyItem);
+          const image = document.getElementById('pictureviewer')
+            .setAttribute('src', 'data:image/png;base64,' + this.arrayBufferToBase64(data));
+        }
+    });
+    /.../
+
+Full code [here](https://github.com/vireth20/keycam_siteA4/blob/master/src/app/Camera/camera.component.ts)
 
 ## Team & Credits
 
-[![Keysim](https://raw.githubusercontent.com/keysim/gearobot/master/doc/img/vireth.png)](http://vireth.com) | [![Vireth](https://raw.githubusercontent.com/keysim/gearobot/master/doc/img/vireth.png)](http://vireth.com)
----|---
-:chicken: [Vireth Thach sok](vireth.com) | :monkey: [Vireth Thach sok](vireth.com)
+[![Vireth](https://raw.githubusercontent.com/keysim/gearobot/master/doc/img/vireth.png)](http://vireth.com)
+--- |
+:monkey: [Vireth Thach sok](vireth.com)
 
 ## License
 
