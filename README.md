@@ -1,6 +1,6 @@
 # KEYCAM WITH ANGULAR 4 ?
 
-Projet Android for Embedded Software Development based on Android at BJTU (Beijing Jiaotong University)
+Projet Android for SOFTWARE PROJECT TRAINING 2 based on Angular 4 at BJTU (Beijing Jiaotong University)
 
 #### Motivation and ambition
 
@@ -26,50 +26,82 @@ The project was born during a SOFTWARE PROJECT TRAINING 2 course at Beijing Jiao
         ├── environments        # Different configuration for prod / dev
         └── other               # Index.html / Some configuration
 
-## Examples Activity
+## Example modal
 
-#### Flash Activity
+#### Login component TS
 
-    /.../
-    
-    mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-    
-    try {
-        mCameraId = mCameraManager.getCameraIdList()[0];
-    } catch (CameraAccessException e) {
-        e.printStackTrace();
-    }
+    @Component({
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    providers: [SnackBar],
+    styleUrls: ['./login.component.css']
+    })
+    export class LoginComponent {
+    isDisabled;
 
-    try {
-	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-	    mCameraManager.setTorchMode(mCameraId, true);
+    constructor(public dialogRefLogin: MdDialogRef<LoginComponent>,
+              public dialogRefCreate: MdDialogRef<CreateComponent>,
+              public dialog: MdDialog,
+              private router: Router,
+              private snack: SnackBar,
+              private cookieService: CookieService,
+              private keycamService: KeycamService) {}
+
+    onSubmit(f: NgForm) {
+      this.isDisabled = !this.isDisabled;
+      if (f.valid === true) {
+        this.keycamService.connection(f.value.email as string, f.value.password as string)
+          .then(response => {
+            if (response === false) {
+              this.snack.open('LOGIN ERROR');
+              this.isDisabled = !this.isDisabled;
+            } else {
+            const user = {
+              token: response.token,
+              id: response.id,
+              email: f.value.email
+            };
+            this.cookieService.putObject('User', user);
+            this.dialogRefLogin.close(f.value.email);
+            this.router.navigate(['/camera']);
+            this.snack.open('LOGIN SUCCESS');
+            this.isDisabled = !this.isDisabled;
+            }
+          });
+        }   else {
+          this.snack.open('FORM ERROR');
+          this.isDisabled = !this.isDisabled;
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+      }
+
+      create() {
+        this.dialogRefLogin.close();
+        this.dialogRefCreate = this.dialog.open(CreateComponent);
+      }
     }
-    
-    /.../
 
-Full code [here](https://github.com/vireth20/Android_BJTU/blob/master/mobile/src/main/java/com/example/vireth/doyourphonesuck/FlashActivity.java)
+Full code [here](https://github.com/vireth20/keycam_siteA4/blob/master/src/app/Login/login.component.ts)
 
-#### Camera Activity
+#### #### Login component HTML
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        /.../
+    <h1 md-dialog-title>{{ 'LOGIN.sign' | translate }}</h1>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <md-input-container>
+      <input mdInput name="email" type="text" ngModel required placeholder="{{ 'LOGIN.email' | translate }}">
+      </md-input-container>
+      <br/>
+      <md-input-container>
+        <input mdInput name="password" type="password" ngModel required placeholder="{{ 'LOGIN.password' | translate }}">
+      </md-input-container>
+      <br><br>
+      {{ 'LOGIN.create' | translate }} <a class="ici" (click)="create()">{{ 'LOGIN.here' | translate }}</a>
+      <br><br>
+      <md-dialog-actions>
+        <button md-raised-button type="submit" [disabled]="isDisabled">{{ 'LOGIN.log' | translate }}</button>
+      </md-dialog-actions>
+    </form>
 	
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, CAMERA_REQUEST);
-    }
-    
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(photo);
-        }
-    }
-	
-Full code [here](https://github.com/vireth20/Android_BJTU/blob/master/mobile/src/main/java/com/example/vireth/doyourphonesuck/CameraFront.java)
+Full code [here](https://github.com/vireth20/keycam_siteA4/blob/master/src/app/Login/login.component.html)
 
 ## Examples Api System Test
 
